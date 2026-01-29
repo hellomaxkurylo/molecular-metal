@@ -1,0 +1,87 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<header class:list={['header', className]}>
+  <div class="header__grid">
+    <a href="/" class="header__brand">North Point</a>
+    <nav class="header__nav">
+      <a href="/expertise">Expertise</a>
+      <a href="/#about">About</a>
+      <a href="/#insights">Insights</a>
+      <a href="/contact" class="header__cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .header__grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  .header__brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.04em;
+    color: var(--color-text-primary);
+    pointer-events: auto;
+    text-transform: lowercase;
+    text-decoration: none;
+  }
+
+  .header__nav {
+    pointer-events: auto;
+    display: flex;
+    gap: 1.75rem;
+    background: var(--color-accent);
+    color: var(--color-accent-text);
+    border-radius: var(--radius-pill);
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    align-items: center;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+  }
+
+  .header__nav a {
+    color: var(--color-accent-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .header__nav .header__cta {
+    background: var(--color-accent-text);
+    color: var(--color-accent) !important;
+    padding: 0.625rem 1.5rem;
+    border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 768px) {
+    .header__grid {
+      padding: 0 1.5rem;
+    }
+
+    .header__nav > a:not(.header__cta) {
+      display: none;
+    }
+
+    .header__nav {
+      padding: 0.5rem;
+    }
+  }
+</style>

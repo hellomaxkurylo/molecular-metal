@@ -1,0 +1,353 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Icon from '../components/Icon.astro';
+import CallToAction from '../components/CallToAction.astro';
+
+const expertiseData = [
+  {
+    id: 1,
+    label: '01 / Strategic Risk',
+    intro: 'We help leadership teams identify structural vulnerabilities before they manifest as crises, ensuring long-term resilience across global operations.',
+    items: [
+      {
+        title: 'Geopolitical Navigation',
+        description: 'Mapping regulatory and political shifts in emerging markets to de-risk capital allocation and supply chain logistics.',
+        tags: ['Market Entry', 'Sovereign Risk', 'Trade Compliance']
+      },
+      {
+        title: 'Crisis Stabilization',
+        description: 'Acting as a neutral third party to stabilize operations during high-velocity transitions or leadership vacuums.',
+        tags: ['Interim Management', 'Reputation Recovery', 'Operational Continuity']
+      }
+    ]
+  },
+  {
+    id: 2,
+    label: '02 / M&A Integration',
+    intro: 'Beyond the balance sheet, we focus on the cultural and operational synergy that determines the ultimate success of large-scale consolidation.',
+    items: [
+      {
+        title: 'Post-Merger Integration',
+        description: 'Synchronizing disparate corporate structures into a unified operating model with minimal disruption to core revenue streams.',
+        tags: ['Synergy Realization', 'Culture Mapping', 'Systems Consolidation']
+      },
+      {
+        title: 'Divestiture Strategy',
+        description: 'Executing clean separations for non-core assets to unlock shareholder value and sharpen organizational focus.',
+        tags: ['Asset Carve-outs', 'TSA Management', 'Portfolio Optimization']
+      }
+    ]
+  },
+  {
+    id: 3,
+    label: '03 / Capital Architecture',
+    intro: 'Optimizing the financial foundation to support aggressive growth trajectories and complex liquidity events.',
+    items: [
+      {
+        title: 'IPO Readiness',
+        description: 'Ensuring internal controls and governance structures meet the rigorous demands of public markets long before the bell rings.',
+        tags: []
+      },
+      {
+        title: 'Capital Restructuring',
+        description: 'Re-engineering debt and equity stacks to provide maximum flexibility in volatile interest rate environments.',
+        tags: []
+      }
+    ]
+  }
+];
+
+const metrics = [
+  { value: '$14B+', label: 'Transaction Value Guided' },
+  { value: '24', label: 'Global Jurisdictions' },
+  { value: '3:1', label: 'Avg. Risk Mitigation Ratio' }
+];
+---
+
+<BaseLayout title="Expertise | North Point" description="Specialized advisory for the highest levels of enterprise friction.">
+  <Header />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="texture texture--left" aria-hidden="true">ELEVATION</div>
+      <div class="texture texture--right" aria-hidden="true">SUMMIT</div>
+      <div class="container">
+        <span class="label">Core Domains</span>
+        <h1>Specialized advisory for the highest levels of enterprise friction.</h1>
+      </div>
+    </section>
+
+    <!-- Expertise Sections (first two) -->
+    {expertiseData.slice(0, 2).map((section) => (
+      <section class="expertise-section">
+        <div class="container expertise-grid">
+          <div class="expertise-label">
+            <span class="label">{section.label}</span>
+          </div>
+          <div class="expertise-content">
+            <p class="expertise-intro">{section.intro}</p>
+            <div class="expertise-items">
+              {section.items.map((item, idx) => (
+                <div class:list={['expertise-item', { 'expertise-item--last': idx === section.items.length - 1 }]}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  {item.tags.length > 0 && (
+                    <div class="tags">
+                      {item.tags.map((tag) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <!-- Track Record Section -->
+    <section class="track-record">
+      <div class="container">
+        <span class="label">Track Record</span>
+        <div class="metrics-grid">
+          {metrics.map((metric) => (
+            <div class="metric">
+              <span class="metric__value">{metric.value}</span>
+              <span class="metric__label">{metric.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Capital Architecture Section -->
+    <section class="expertise-section">
+      <div class="container expertise-grid">
+        <div class="expertise-label">
+          <span class="label">{expertiseData[2].label}</span>
+        </div>
+        <div class="expertise-content">
+          <p class="expertise-intro">{expertiseData[2].intro}</p>
+          <div class="expertise-items">
+            {expertiseData[2].items.map((item, idx) => (
+              <div class:list={['expertise-item', { 'expertise-item--last': idx === expertiseData[2].items.length - 1 }]}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+          <div class="cta-wrapper">
+            <a href="/contact" class="pill-btn pill-btn--inverse">
+              Consult an Expert
+              <Icon name="arrow" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CallToAction
+      headline="Ready to navigate complexity?"
+      ctaText="Start the Conversation"
+      ctaHref="/contact"
+    />
+  </main>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-top: 12rem;
+    padding-bottom: 8rem;
+    background: radial-gradient(circle at 90% 10%, rgba(30, 41, 59, 0.5) 0%, transparent 40%);
+  }
+
+  /* Texture decorations - contained within hero */
+  .texture {
+    position: absolute;
+    font-size: 15rem;
+    font-weight: 900;
+    opacity: 0.03;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 0;
+  }
+
+  .texture--left {
+    top: 0;
+    left: -5%;
+  }
+
+  .texture--right {
+    bottom: 0;
+    right: -10%;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    max-width: 900px;
+  }
+
+  /* Expertise Sections */
+  .expertise-section {
+    padding: 8rem 0;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+  }
+
+  .expertise-label {
+    position: sticky;
+    top: 8rem;
+    height: fit-content;
+  }
+
+  .expertise-intro {
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin-bottom: 3rem;
+  }
+
+  .expertise-items {
+    list-style: none;
+  }
+
+  .expertise-item {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .expertise-item:first-child {
+    padding-top: 0;
+  }
+
+  .expertise-item--last {
+    border-bottom: none;
+  }
+
+  .expertise-item h3 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .expertise-item p {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin-bottom: 2rem;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-secondary);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--color-text-primary);
+  }
+
+  /* Track Record Section */
+  .track-record {
+    padding: 8rem 0;
+  }
+
+  .metrics-grid {
+    background: var(--color-bg-alt);
+    padding: 4rem;
+    border-radius: var(--radius-card);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    margin-top: 4rem;
+  }
+
+  .metric__value {
+    font-size: 2.5rem;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric__label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* CTA Wrapper */
+  .cta-wrapper {
+    margin-top: 4rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .expertise-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .expertise-label {
+      position: static;
+    }
+
+    .metrics-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .texture {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: 10rem;
+      padding-bottom: 4rem;
+    }
+
+    .expertise-section {
+      padding: 4rem 0;
+    }
+
+    .expertise-intro {
+      font-size: 1.25rem;
+    }
+
+    .expertise-item h3 {
+      font-size: 1.5rem;
+    }
+
+    .track-record {
+      padding: 4rem 0;
+    }
+  }
+</style>
