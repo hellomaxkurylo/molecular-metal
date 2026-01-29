@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  image: string;
+  imageAlt: string;
+  quote: string;
+  name: string;
+  title: string;
+  bio: string;
+}
+
+const { image, imageAlt, quote, name, title, bio } = Astro.props;
+---
+
+<div class="founder">
+  <div class="founder__image">
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={828}
+      height={1035}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="founder__content">
+    <span class="label">Leadership</span>
+    <blockquote class="founder__quote">{quote}</blockquote>
+    <cite class="founder__attribution">
+      — {name}, {title}
+    </cite>
+    <p class="founder__bio">{bio}</p>
+    <div class="founder__logos">
+      <svg class="founder__logo" viewBox="0 0 100 24" fill="currentColor" aria-hidden="true">
+        <rect width="20" height="20" rx="4"></rect>
+        <rect x="25" width="20" height="20" rx="4"></rect>
+        <rect x="50" width="20" height="20" rx="4"></rect>
+      </svg>
+      <svg class="founder__logo" viewBox="0 0 100 24" fill="currentColor" aria-hidden="true">
+        <circle cx="10" cy="10" r="10"></circle>
+        <rect x="25" y="5" width="40" height="10"></rect>
+      </svg>
+      <svg class="founder__logo" viewBox="0 0 100 24" fill="currentColor" aria-hidden="true">
+        <path d="M0 20 L10 0 L20 20 Z"></path>
+        <rect x="25" y="5" width="40" height="10"></rect>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  .founder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .founder__image {
+    position: relative;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+
+  .founder__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(110%);
+  }
+
+  .founder__quote {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    line-height: 1.2;
+    font-style: normal;
+  }
+
+  .founder__attribution {
+    display: block;
+    border-left: 2px solid var(--color-text-secondary);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+
+  .founder__bio {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .founder__logos {
+    display: flex;
+    gap: 2rem;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    margin-top: 2rem;
+  }
+
+  .founder__logo {
+    height: 24px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .founder {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .founder__image {
+      order: -1;
+    }
+
+    .founder__quote {
+      font-size: 1.5rem;
+    }
+  }
+</style>

@@ -1,17 +1,167 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import FounderSection from '../components/FounderSection.astro';
+import InsightCard from '../components/InsightCard.astro';
+import CallToAction from '../components/CallToAction.astro';
 
+const services = [
+  {
+    icon: 'layers' as const,
+    title: 'Structural Assessment',
+    description: 'We map the underlying terrain of your organization to identify hidden fractures before weight is applied.'
+  },
+  {
+    icon: 'globe' as const,
+    title: 'Route Planning',
+    description: 'Developing the shortest viable path to market leadership, calculating risk coefficients at every turn.'
+  },
+  {
+    icon: 'users' as const,
+    title: 'Expedition Leadership',
+    description: "We don't just advise from base camp. We embed senior partners to guide execution phases."
+  }
+];
+
+const insights = [
+  {
+    image: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=2076&auto=format&fit=crop',
+    meta: 'Q1 2025 Report',
+    title: 'The Thin Air of IPOs: Navigating Capital Markets in a High-Interest Era',
+    href: '/insights/ipo-navigation'
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1520209759809-a93190d193c0?q=80&w=2070&auto=format&fit=crop',
+    meta: 'Case Study',
+    title: 'Syllogism & Scale: How Theoretical Models Break Down in Practice',
+    href: '/insights/syllogism-scale'
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="North Point | Strategic Guidance">
+  <Header />
+
+  <main>
+    <Hero
+      headline="Clarity at<br />Elevation."
+      subheadline="Strategic guidance for high-stakes enterprise transformation. We navigate the complexity between where you are and the summit."
+      ctaText="Start the Ascent"
+      ctaHref="/contact"
+      image="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop"
+      imageAlt="Snow-covered mountain peaks at sunrise"
+    />
+
+    <!-- Proof Section -->
+    <section class="proof">
+      <div class="container">
+        <p class="proof__statement">
+          Trusted by Fortune 500 leadership to de-risk <span class="proof__highlight">critical mergers</span>, stabilize <span class="proof__highlight">volatile transitions</span>, and architect <span class="proof__highlight">resilient growth</span> in uncertain markets.
+        </p>
+      </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="label">Methodology</span>
+          <h2>The North Point Framework</h2>
+        </div>
+        <div class="services-grid">
+          {services.map((service) => (
+            <ServiceCard
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="section">
+      <div class="container">
+        <FounderSection
+          image="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2070&auto=format&fit=crop"
+          imageAlt="Elias Thorne, Managing Partner"
+          quote='"Complexity is not the enemy. It is the terrain. The enemy is moving without a compass."'
+          name="Elias Thorne"
+          title="Managing Partner"
+          bio="Formerly Strategy Director at McKinsey & Co and lead advisor for 3 of the G20 infrastructure summits."
+        />
+      </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section id="insights" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="label">Intelligence</span>
+          <h2>Field Notes</h2>
+        </div>
+        <div class="insights-grid">
+          {insights.map((insight) => (
+            <InsightCard
+              image={insight.image}
+              meta={insight.meta}
+              title={insight.title}
+              href={insight.href}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CallToAction
+      headline="The summit is waiting.<br />Are you ready to move?"
+      ctaText="Schedule Consultation"
+      ctaHref="/contact"
+    />
+  </main>
+</BaseLayout>
+
+<style>
+  /* Proof Section */
+  .proof {
+    background: var(--color-bg);
+    text-align: center;
+    padding: 6rem 0;
+  }
+
+  .proof__statement {
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .proof__highlight {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  /* Grids */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .services-grid,
+    .insights-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
